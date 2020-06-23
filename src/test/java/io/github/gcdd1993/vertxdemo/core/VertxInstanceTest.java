@@ -8,8 +8,7 @@ import io.vertx.core.spi.cluster.ClusterManager;
 import org.junit.jupiter.api.Test;
 
 /**
- * 创建vertx对象
- * https://vertxchina.github.io/vertx-translation-chinese/core/Core.html
+ * Vert.x :: Instance
  */
 public class VertxInstanceTest {
 
