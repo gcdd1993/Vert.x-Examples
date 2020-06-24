@@ -26,6 +26,9 @@ repositories {
 
 dependencies {
     implementation 'io.vertx:vertx-core:3.9.1'
+    implementation 'io.vertx:vertx-rx-java2:3.9.1'
+    implementation 'io.vertx:vertx-zookeeper:3.9.1'
+    implementation 'io.vertx:vertx-pg-client:3.9.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
