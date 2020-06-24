@@ -1,7 +1,11 @@
 package io.github.gcdd1993.vertxdemo.core;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.eventbus.EventBusOptions;
+import io.vertx.core.http.ClientAuth;
+import io.vertx.core.net.JksOptions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -166,6 +170,31 @@ public class EventBusTest {
         while (true) {
             // blocked
         }
+    }
+
+    @Test
+    public void eventBus_config() {
+        var vertxOptions = new VertxOptions();
+        var keyStoreOptions = new JksOptions()
+                .setPath("keystore.jks")
+                .setPassword("wibble");
+
+        var eventBusOptions = new EventBusOptions()
+                .setSsl(true)
+                .setKeyStoreOptions(keyStoreOptions)
+                .setTrustStoreOptions(keyStoreOptions)
+                .setClientAuth(ClientAuth.REQUIRED);
+
+        vertxOptions.setEventBusOptions(eventBusOptions);
+        Vertx.clusteredVertx(vertxOptions, res -> {
+            if (res.succeeded()) {
+                var vertx = res.result();
+                var eventBus = vertx.eventBus();
+                System.out.println("We now have a clustered event bus: " + eventBus);
+            } else {
+                System.out.println("Failed: " + res.cause());
+            }
+        });
     }
 
 }
